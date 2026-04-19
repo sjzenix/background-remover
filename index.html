@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Free Background Remover | SJZenix</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Free AI background remover tool. Remove background instantly online.">
+    <meta name="keywords" content="background remover, remove bg, free tool, AI image editor">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h2 class="logo">SJZenix</h2>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>Remove Background Instantly</h1>
+        <p>100% Free AI Background Remover Tool</p>
+
+        <!-- Upload Area -->
+        <div id="dropArea">
+            <p>Drag & Drop Image Here</p>
+            <p>or</p>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+
+        <!-- Button (hidden initially) -->
+        <button id="removeBtn" onclick="removeBg()" style="display:none;">
+            Remove Background
+        </button>
+
+        <!-- Loader -->
+        <div id="loader" style="display:none;">
+            <p>Processing image...</p>
+        </div>
+
+        <!-- RESULT SECTION -->
+        <div class="result">
+
+            <!-- Original Image -->
+            <img id="originalImage" alt="Original Image" style="display:none;">
+
+            <!-- Removed Image -->
+            <img id="removedImage" alt="Background Removed Image" style="display:none;">
+
+            <!-- Download Button -->
+            <a id="downloadBtn" download="removed.png" style="display:none;">
+                <button>Download Image</button>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 SJZenix | Free AI Tools</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

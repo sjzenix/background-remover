@@ -1,0 +1,140 @@
+/* Reset & Base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+.header {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+/* Container */
+.container {
+  margin-top: 120px;
+  padding: 20px;
+}
+
+/* Text */
+h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #94a3b8;
+}
+
+/* Upload Input */
+input[type="file"] {
+  margin-top: 15px;
+  padding: 10px;
+  background: #1e293b;
+  border: 1px dashed #38bdf8;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Drag & Drop Area */
+#dropArea {
+  margin: 20px auto;
+  padding: 30px;
+  border: 2px dashed #38bdf8;
+  border-radius: 15px;
+  width: 300px;
+  background: #1e293b;
+  transition: 0.3s;
+}
+
+#dropArea:hover {
+  background: #334155;
+}
+
+#dropArea p {
+  margin: 5px;
+}
+
+/* Button */
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: linear-gradient(45deg, #22c55e, #4ade80);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* RESULT IMAGES */
+.result {
+  position: relative; /* 🔥 needed for overlay */
+}
+
+.result img {
+  display: block;
+  margin: 20px auto;
+  max-width: 300px;
+  width: 90%;
+  border-radius: 10px;
+}
+
+/* 🔥 LOADER OVER IMAGE */
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #38bdf8;
+  animation: blink 1s infinite;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+/* Animation */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Download Button */
+#downloadBtn {
+  display: block;
+  margin-top: 15px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  button {
+    width: 80%;
+  }
+
+  #dropArea {
+    width: 90%;
+  }
+}
