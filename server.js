@@ -5,13 +5,19 @@ const fetch = require("node-fetch");
 const FormData = require("form-data");
 
 const app = express();
-app.use(cors());
+
+// ✅ Better CORS (allow your frontend)
+app.use(cors({
+  origin: "*"
+}));
+
+app.use(express.json());
 
 const upload = multer();
 
+// ✅ ROUTE
 app.post("/remove-bg", upload.single("image_file"), async (req, res) => {
   try {
-    // ✅ check if file exists
     if (!req.file) {
       return res.status(400).send("No file uploaded");
     }
@@ -22,27 +28,31 @@ app.post("/remove-bg", upload.single("image_file"), async (req, res) => {
     const response = await fetch("https://api.remove.bg/v1.0/removebg", {
       method: "POST",
       headers: {
-        "X-Api-Key": "Z4j28hizY3vZhkZvTVhHCzdc" // 🔥 FIX HERE
+        "X-Api-Key": process.env.REMOVE_BG_API_KEY // ✅ SAFE
       },
       body: formData
     });
 
     if (!response.ok) {
-  const text = await response.text();
-  console.log("🔥 REMOVE.BG ERROR FULL:", text); // force visible
-  return res.status(500).send(text);
-}
-    const buffer = await response.buffer();
+      const text = await response.text();
+      console.log("REMOVE.BG ERROR:", text);
+      return res.status(500).send(text);
+    }
+
+    const buffer = await response.arrayBuffer();
 
     res.set("Content-Type", "image/png");
-    res.send(buffer);
+    res.send(Buffer.from(buffer));
 
   } catch (err) {
-  console.log("🔥 SERVER ERROR FULL:", err);
-  res.status(500).send("Server error");
-}
+    console.log("SERVER ERROR:", err);
+    res.status(500).send("Server error");
+  }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+// ✅ IMPORTANT FOR RENDER
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
