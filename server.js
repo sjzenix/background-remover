@@ -6,14 +6,20 @@ const FormData = require("form-data");
 
 const app = express();
 
-// ✅ Allow frontend access
-app.use(cors({ origin: "*" }));
+// ✅ CORS FIX (VERY IMPORTANT)
+app.use(cors({
+  origin: "*",
+}));
 
-app.use(express.json());
-
+// ✅ Upload middleware
 const upload = multer();
 
-// ✅ ROUTE
+// ✅ TEST ROUTE (IMPORTANT - prevents "Cannot GET /")
+app.get("/", (req, res) => {
+  res.send("Backend is working 🚀");
+});
+
+// ✅ MAIN API
 app.post("/remove-bg", upload.single("image_file"), async (req, res) => {
   try {
     if (!req.file) {
@@ -26,15 +32,15 @@ app.post("/remove-bg", upload.single("image_file"), async (req, res) => {
     const response = await fetch("https://api.remove.bg/v1.0/removebg", {
       method: "POST",
       headers: {
-        "X-Api-Key": process.env.REMOVE_BG_API_KEY // ✅ correct way
+        "X-Api-Key": process.env.REMOVE_BG_API_KEY // 🔐 from Render
       },
       body: formData
     });
 
     if (!response.ok) {
-      const text = await response.text();
-      console.log("REMOVE.BG ERROR:", text);
-      return res.status(500).send(text);
+      const errorText = await response.text();
+      console.log("REMOVE.BG ERROR:", errorText);
+      return res.status(500).send(errorText);
     }
 
     const buffer = await response.arrayBuffer();
@@ -48,9 +54,9 @@ app.post("/remove-bg", upload.single("image_file"), async (req, res) => {
   }
 });
 
-// ✅ IMPORTANT FOR RENDER
-const PORT = process.env.PORT || 10000;
+// ✅ PORT FIX (IMPORTANT FOR RENDER)
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+  console.log(`Server running on port ${PORT}`);
 });
