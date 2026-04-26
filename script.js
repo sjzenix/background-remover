@@ -19,7 +19,7 @@ async function removeBg() {
     const formData = new FormData();
     formData.append("image_file", file); // ✅ FIXED
 
-    const response = await fetch("http://localhost:5000/remove-bg", {
+    const response = await fetch("https://background-remover-bl43.onrender.com/remove-bg", {
       method: "POST",
       body: formData
     });
