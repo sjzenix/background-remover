@@ -9,6 +9,7 @@ const app = express();
 // ✅ CORS FIX (VERY IMPORTANT)
 app.use(cors({
   origin: "*",
+  methods: ["GET", "POST"],
 }));
 
 // ✅ Upload middleware
